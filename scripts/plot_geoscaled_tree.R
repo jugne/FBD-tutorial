@@ -3,7 +3,10 @@ library("phyloch")
 library("strap")
 library("coda")
 
-t <- read.beast("bearsTree.summary.tre")
+# change below to CCD0
+# to plot for CCD0 tree
+summary_method <- "MCC"
+t <- read.beast(paste0("bearsTree.",summary_method,"_summary.tre"))
 t$root.time <- t$height[1]
 
 log_data1 <- read.table("bearsDivtime_FBD.1.log",header=T)
@@ -63,7 +66,7 @@ for(tp in 1:length(t$tip.label)){
 root_max <- t$"height_95%_HPD_MAX"[1]
 x_max <- origin_HPD[2] * 0.1 + origin_HPD[2]
 
-pdf("geoscaled_bears.pdf", width=10, height=7)
+pdf(paste0("geoscaled_bears_",summary_method,".pdf"), width=10, height=7)
 geoscalePhylo(tree=ladderize(t,right=FALSE), boxes="Age", cex.tip=1.2,cex.age=1,
 				cex.ts=1,label.offset=0,x.lim=c(-15,x_max),lwd=1.5)
 

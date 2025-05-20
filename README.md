@@ -460,7 +460,23 @@ We will generate a _maximum clade credibility tree_ (MCC), which is the topology
 
 #### Producing CCD0 tree
 
-We will generate _conditional clade distribution_ tree (CCD). In particular, the CCD0 tree, which is a summary tree that maximises the conditional clade distribution and considers all possible combinations of clades (not necesarily only the topologies sampled by MCMC). The procedure is _alsmost_ identical to producing the MCC tree in **TreeAnnotator**:
+To produce CCD0 summary tree, you will first need to install the CCD package.
+> Open BEAUTi
+> 
+> Select **File -> Manage packages**
+> 
+> Select **CCD** package in the list and select **Install/Upgrade** [Figure 27](#fig:installCCD)
+> 
+> Close BEAUTi
+
+<figure>
+	<a id="fig:installCCD"></a>
+	<img style="width:80%;" src="figures/installCCD0.png">
+	<figcaption>Figure 27: Install CCD package</figcaption>
+</figure>
+<br>
+
+We will generate _conditional clade distribution_ tree (CCD). In particular, the CCD0 tree, which is a summary tree that maximises the conditional clade distribution and considers all possible combinations of clades (not necessarily only the topologies sampled by MCMC). The procedure is _almost_ identical to producing the MCC tree in **TreeAnnotator**:
 
 >Open the program **TreeAnnotator**. Since we already discarded a set of burn-in trees when combining the tree files, we can leave **Burnin** set to 0 (though, if TreeAnnotator is taking a long time to load the trees, click on the **Low memory** option at the bottom left and set the burnin to 10--60% to reduce the number of trees). For the **Target tree type**, choose **MAP(CCD0)*. Choose **Median heights** for **Node heights**, and choose `bearsTree.combined.trees` as your **Input Tree File**. Then name the **Output File** `bearsTree.CCD0_summary.tre` and click **Run**.
 
@@ -469,14 +485,16 @@ We will generate _conditional clade distribution_ tree (CCD). In particular, the
 
 The file produced by TreeAnnotator contains the summary tree annotated with the summaries of the various parameters. This tree and it's annotations can be visualized in the program **FigTree**. We show results for MCC and CCD0 summary trees side by side. **Again, you may run just one method and compare it to the other using the figures below.**
 
->Execute **FigTree** and open the summary tree file (`bearsTree.MCC_summary.tre` or `bearsTree.CCD0_summary.tre`).
+> Execute **FigTree** and open the summary tree file (`bearsTree.MCC_summary.tre` or `bearsTree.CCD0_summary.tre`).
+>
+> Tip: if you would like to easier compare MCC and CCD0 summary trees, select **Trees -> Order nodes -> decreasing**. This will order the nodes so you can better compare topology by eye. 
 
 The tree you are viewing in FigTree has several fossil taxa with zero-length branches, e.g., _Parictis montanus_ and _Ursus abstrusus_. These branches actually indicate fossil taxa with a significant probability of representing a sampled ancestor. However, it is difficult to represent this in typical tree-viewing programs. A tree with sampled ancestors properly represented will have two-degree nodes --- i.e., a node with only one descendant. The web-based tree viewer [IcyTree](http://icytree.org/) {% cite Vaughan2017 --file FBD-tutorial/master-refs.bib %} is capable of plotting such trees from BEAST2 analyses. 
 
 <figure>
- <a id="fig:27"></a>
+ <a id="fig:28"></a>
  <img style="width:75%;" src="figures/bearsTree_MCC_icytree.png" alt="">
- <figcaption>Figure 27: A sampled-ancestor tree exported from IcyTree.</figcaption>
+ <figcaption>Figure 28: A sampled-ancestor tree exported from IcyTree.</figcaption>
 </figure>
 
 Although the tree above looks awesome, the topology can be misleading for this particular analysis. Because we did not provide character data for our 14 fossil taxa, the fossil lineages can attach to any lineage on the tree that is consistent with the monophyletic clades we specified and the fossil occurrence times with equal probability. However, we can prune off all of the fossil lineages, leaving only the tips infomed with DNA sequence data. We can do this using **FullToExtantTreeConverter**, then use **TreeAnnotator** to summarize the extant-only trees.
@@ -484,9 +502,9 @@ Although the tree above looks awesome, the topology can be misleading for this p
 >Open BEAUti and launch the accessory apps via **File > Launch Apps**. This will open a window with a few applications, launch **FullToExtantTreeConverter**. In the file specification window for **Trees** provide the file called `bearsTree.combined.trees`. And give the **Output** file the name `bearsTree.extant.trees`.
 
 <figure>
- <a id="fig:28"></a>
+ <a id="fig:29"></a>
  <img style="width:50%;" src="figures/full_to_extant_converter.png" alt="">
- <figcaption>Figure 28: The options for FullToExtantTreeConverter.</figcaption>
+ <figcaption>Figure 29: The options for FullToExtantTreeConverter.</figcaption>
 </figure>
 
 >Run **TreeAnnotator** on the file called `bearsTree.extant.trees`. Selecting the same options as you did for the file with complete trees to procuce MCC or CCD0 summary tree. According to the chosen method,name  the summary tree file `bearsTree.MCC_extant_summary.tre` or `bearsTree.CCD0_extant_summary.tre`.
@@ -494,9 +512,9 @@ Although the tree above looks awesome, the topology can be misleading for this p
 R code is also provided in the **Scripts** directory, which can be used to plot the tree against a geological timescale using the `strap` package {% cite bell2014strap --file FBD-tutorial/master-refs.bib %}.
 
 <figure>
- <a id="fig:29"></a>
+ <a id="fig:30"></a>
  <img style="width:75%;" src="figures/geoscaled_bears_ext_MCC.png" alt="">
- <figcaption>Figure 29: The maximum clade credibility (MCC) tree of extant bears summarized by TreeAnnotator and plotted against stratigraphy using the strap package in R. The internal nodes of the tree are indicated with circles, where circles mark nodes with posterior probability. The 95% credible intervals for node ages are shown with transparent blue bars.</figcaption>
+ <figcaption>Figure 30: The maximum clade credibility (MCC) tree of extant bears summarized by TreeAnnotator and plotted against stratigraphy using the strap package in R. The internal nodes of the tree are indicated with circles, where circles mark nodes with posterior probability. The 95% credible intervals for node ages are shown with transparent blue bars.</figcaption>
 </figure>
 
 # Useful Links

@@ -514,7 +514,7 @@ R code is also provided in the **Scripts** directory, which can be used to plot 
 
 <figure>
  <a id="fig:30"></a>
- <img style="width:75%;" src="figures/geoscaled_bears_ext_MCC.png" alt="">
+ <img style="width:75%;" src="figures/geoscaled_bears_MCC.pdf" alt="">
  <figcaption>Figure 30: The maximum clade credibility (MCC) tree summarized by TreeAnnotator and plotted against stratigraphy using the strap package in R. The internal nodes of the tree are indicated with circles, where circles mark nodes with posterior probability (black >= 0.85, grey>=0.75, else - white). The 95% credible intervals for node ages are shown with transparent blue bars.</figcaption>
 </figure>
 

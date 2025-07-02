@@ -4,6 +4,7 @@ level: Intermediate
 title: Divergence Time Estimation
 subtitle: Dating Species Divergences with the Fossilized Birth-Death Process
 beastversion: 2.7.4
+tracerversion: 1.7.x
 ---
 
 
@@ -514,7 +515,7 @@ R code is also provided in the **Scripts** directory, which can be used to plot 
 <figure>
  <a id="fig:30"></a>
  <img style="width:75%;" src="figures/geoscaled_bears_ext_MCC.png" alt="">
- <figcaption>Figure 30: The maximum clade credibility (MCC) tree of extant bears summarized by TreeAnnotator and plotted against stratigraphy using the strap package in R. The internal nodes of the tree are indicated with circles, where circles mark nodes with posterior probability. The 95% credible intervals for node ages are shown with transparent blue bars.</figcaption>
+ <figcaption>Figure 30: The maximum clade credibility (MCC) tree summarized by TreeAnnotator and plotted against stratigraphy using the strap package in R. The internal nodes of the tree are indicated with circles, where circles mark nodes with posterior probability (black >= 0.85, grey>=0.75, else - white). The 95% credible intervals for node ages are shown with transparent blue bars.</figcaption>
 </figure>
 
 # Useful Links
